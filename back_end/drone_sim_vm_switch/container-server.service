@@ -1,0 +1,9 @@
+[UNIT]
+Description=Service to start server on boot up
+
+[Service]
+Type=simple
+ExecStart=node /home/andre/vm-server/vm-server.js
+
+[Install]
+WantedBy=multi-user.target

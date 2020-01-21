@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            display: grid;
+            grid-template-columns: 10px minmax(min-content, max-content) 10px;
+            grid-template-rows: repeat(3, max-content);
+            width: max-content;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        #video {
+            grid-column: 2 / 3;
+            width: 640px;
+            height: 480px;
+        }
+
+        #instrument-wrapper {
+            grid-row: 2 / 4;
+            grid-column: 2 / 3;
+            display: grid;
+            grid-template-columns: max-content;
+            grid-template-rows: minmax(min-content, max-content) minmax(min-content, max-content);
+            position: relative;
+        }
+
+        #left-stick-zone {
+            visibility: hidden;
+            position: absolute;
+            padding: 10px 10px;
+            margin: 0;
+            color: white;
+            top: 150%;
+            right: 80%;
+        }
+
+        #right-stick-zone {
+            position: absolute;
+            padding: 10px 10px;
+            margin: 0;
+            color: white;
+            top: 45%;
+            left: 85%;
+        }
+
+        #thrust-gauge,
+        #roll-gauge {
+            width: 150px;
+            height: 90px;
+            margin-left: 10px;
+            background-color: inherit;
+        }
+
+        #thrust-gauge {
+            grid-column: 1 / 2;
+        }
+
+        #roll-gauge {
+            grid-column: 1 / 2;
+        }
+
+        #info {
+            width: 300px;
+            height: 150px;
+            background-color: rgb(53, 53, 53);
+            margin-top: 10px;
+            margin-bottom: 10px;
+            grid-row: 1 / 3;
+            grid-column: 2 / 3;
+            margin-left: 20px;
+            border: none;
+            resize: none;
+            overflow: hidden;
+            padding-top: 10px;
+            cursor: default;
+        }
+
+        .gauge-container {
+            position: relative;
+        }
+
+        .gauge-container>.label {
+            position: absolute;
+            right: 0;
+            top: 0;
+            display: inline-block;
+            background: inherit;
+            color: rgb(247, 238, 229);
+            font-size: 0.8em;
+            padding: 5px 5px;
+            font-family: monospace;
+        }
+
+        .gauge-container>.keys {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            background: inherit;
+            color: rgb(247, 238, 229);
+            font-size: 0.8em;
+            padding: 5px 5px;
+            font-family: monospace;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        @media only screen and (max-width: 1024px) {
+
+            #video,
+            #info,
+            body {
+                width: 100%;
+                margin: 0px;
+            }
+
+            #video {
+                height: 255px;
+            }
+
+            #info {
+                box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -ms-box-sizing: border-box;
+            }
+
+            body {
+                grid-template-columns: 0px minmax(min-content, max-content) 0px;
+            }
+
+            .gauge-container {
+                display: none;
+            }
+
+            #right-stick-zone {
+                top: 150%;
+                left: 77%;
+            }
+
+            #left-stick-zone {
+                visibility: visible;
+            }
+        }
+    </style>
+    <title>Drone</title>
+</head>
+
+<body>
+    <video id="video" autoplay="true" playsinline="true" controls></video>
+
+    <div id="instrument-wrapper">
+        <div class="gauge-container" id="thrust-gauge">
+            <span class="label">Thrust</span>
+            <span class="keys">W / S</span>
+        </div>
+        <div class="gauge-container" id="roll-gauge">
+            <span class="label">Roll</span>
+            <span class="keys">A / D</span>
+        </div>
+        <textarea id="info" readonly></textarea>
+        <div id="right-stick-zone"></div>
+        <div id="left-stick-zone"></div>
+    </div>
+
+    <!-- nipplejs -->
+    <script src="index.js" type="module"></script>
+    <script src="gauge.js" type="application/javascript"></script>
+    <script src="client.js" type="module"></script>
+</body>
+
+</html>
