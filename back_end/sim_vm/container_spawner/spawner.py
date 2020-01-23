@@ -16,15 +16,11 @@ def execute(cmd):
 
 
 # spawn a container and await its complete spin up on the event loop
-async def spawn(resp, subdomain):
+async def spawn(resp):
     for line in execute(
         [
             "docker",
             "run",
-            "-e",
-            "SUBDOMAIN={}".format(subdomain),
-            "--name",
-            subdomain,
             "-it",
             "andremyers/drones:latest",
         ]
@@ -33,29 +29,17 @@ async def spawn(resp, subdomain):
         await resp.drain()
         await asyncio.sleep(0.01)
         if "BUILD SUMMARY" in line.decode("utf-8"):
-            subprocess.Popen(
-                [
-                    "docker",
-                    "exec",
-                    "-it",
-                    subdomain,
-                    "/bin/bash",
-                    "-c",
-                    "ssh -oStrictHostKeyChecking=no -R $(echo $SUBDOMAIN):80:localhost:8081 andrem.net",
-                ]
-            )
             await resp.write_eof()
             break
 
 
 # route handler to spawn container
 async def spawn_container(request):
-    subdomain = request.rel_url.query["sd"]
     resp = web.StreamResponse(
         status=200, reason="OK", headers={"Content-Type": "text/html"}
     )
     await resp.prepare(request)
-    await asyncio.wait([spawn(resp, subdomain)])
+    await asyncio.wait([spawn(resp)])
     return resp
 
 

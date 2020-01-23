@@ -18,7 +18,6 @@ from aiohttp import web
 from av import VideoFrame
 from aiortc import RTCPeerConnection, RTCSessionDescription, VideoStreamTrack
 
-subdomain = os.environ["SUBDOMAIN"]
 pcs = set()
 frame = None
 io_channel = None
@@ -267,7 +266,7 @@ async def gauge(request):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Image topic to Webrtc stream")
     parser.add_argument(
-        "--port", type=int, default=8081, help="Port for HTTP server (default: 8081)"
+        "--port", type=int, default=8080, help="Port for HTTP server (default: 8081)"
     )
     args = parser.parse_args()
 

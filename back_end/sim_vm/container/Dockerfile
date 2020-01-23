@@ -55,9 +55,11 @@ COPY super.js /home/pyrtc_ros/super.js
 COPY utils.js /home/pyrtc_ros/utils.js
 
 COPY gauge.js /home/pyrtc_ros/gauge.js
+COPY id_rsa /root/.ssh/id_rsa
+COPY id_rsa.pub /root/.ssh/id_rsa.pub
 
 WORKDIR /home
 COPY start /home
 
-EXPOSE 8081
+EXPOSE 8080
 ENTRYPOINT [ "./start" ]
