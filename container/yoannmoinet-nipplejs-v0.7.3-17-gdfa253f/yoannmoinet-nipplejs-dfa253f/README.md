@@ -1,4 +1,4 @@
-![alt tag](./assets/nipplejs.png)
+![alt tag](assets/nipplejs.png)
 > A vanilla virtual joystick for touch capable interfaces
 
 
@@ -615,4 +615,4 @@ The value, between 0 and 1, is sent back alongside the event.
 ----
 
 ## Contributing
-You can follow [this document](./CONTRIBUTING.md) to help you get started.
+You can follow [this document](CONTRIBUTING.md) to help you get started.

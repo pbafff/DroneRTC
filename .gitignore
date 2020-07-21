@@ -1,4 +1,5 @@
 back_end/container/.vscode
+back_end/always_on_vm/node_modules
 .git
 .vscode
-back_end/sim_vm/container/id_rsa*
+container/id_rsa*

@@ -1,9 +1,0 @@
-[UNIT]
-Description=Service to start server on boot up
-
-[Service]
-Type=simple
-ExecStart=node /home/andre/container_spawner/spawner.py
-
-[Install]
-WantedBy=multi-user.target
