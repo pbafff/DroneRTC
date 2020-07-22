@@ -8,13 +8,20 @@ RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E
 RUN apt update &&  apt install -y expect wget git nano ssh python-pip libasound2 libgtk-3-0 libignition-math2-dev libgazebo9-dev xvfb libavdevice-dev libavfilter-dev libopus-dev libvpx-dev pkg-config python3-pip python3-yaml python-catkin-tools python3-dev python3-numpy libsrtp2-dev && rm -rf /var/lib/apt/lists/*
 
 #python installs
-RUN pip install mavproxy pymavlink 
-RUN pip3 install rospkg catkin_pkg aiohttp aiortc opencv-python aiohttp_cors dronekit
+RUN pip install mavproxy pymavlink
+#recent versions of aiortc and its dependency av cause problems
+RUN pip3 install rospkg catkin_pkg aiohttp aiortc==0.9.22 opencv-python aiohttp_cors dronekit
 
-#[ardupilot]: git being weird about submodule cloning so copy and build
-COPY ardupilot /home/ardupilot 
+#[ardupilot]: clone and build ardupilot
+WORKDIR /home
+RUN git clone --recurse-submodules -j8 https://github.com/ArduPilot/ardupilot.git
 WORKDIR /home/ardupilot
+RUN sed -i 's/sudo//g' Tools/environment_install/install-prereqs-ubuntu.sh > Tools/environment_install/install-prereqs-ubuntu.sh
+RUN useradd --no-log-init -r notroot
+USER notroot
+#cant be run as root
 RUN USER=nobody Tools/environment_install/install-prereqs-ubuntu.sh -y
+USER root
 RUN ./waf configure --board sitl
 RUN ./waf copter
 
