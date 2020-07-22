@@ -6,7 +6,7 @@ Pull the Docker image `andremyers/drones:latest` and run with `docker run -p 808
 
 Fly the drone using W and S to control thrust, i.e. altitude; A and D to control roll; and the on-screen joystick to control pitch and yaw. The drone is running ArduCopter in Loiter mode for easy flying. It is simulated in [Gazebo](http://gazebosim.org/).
 
-Run this container on a vm to see how well WebRTC handles latency! In my own informal tests I was able to easily fly the drone from NYC while running the container on a northern Virginia Google Cloud vm. 
+Run this container on a vm (with a GPU attached) to see how well WebRTC handles latency! In my own informal tests I was able to easily fly the drone from NYC while running the container on a northern Virginia Google Cloud vm. 
 
 TODO:
 Figure out how to actually obtain and display the exact amount of latency.
