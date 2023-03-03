@@ -50,7 +50,7 @@
     "eslint-loader": "2.1.1",
     "expect.js": "0.3.1",
     "markdown-toc": "1.2.0",
-    "mocha": "5.2.0",
+    "mocha": "10.2.0",
     "phantomjs-prebuilt": "2.1.16",
     "webpack": "4.27.1",
     "webpack-cli": "3.1.2",
